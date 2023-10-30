@@ -13,53 +13,83 @@
 }
 
 .main {
-  opacity: 0;
   box-sizing: border-box;
+  opacity: 0;
 
-  .hero{
-    height: 100vh;
-    background: #4E84FF;
+  section{
+    // visibility: hidden;
+    
 
-    .hero-logo{
-      padding-top: 2rem
-    }
 
-    .hero-content{
+    .hero{
+      height: 110vh;
+      background: #4E84FF;
 
-      .hero-heading{
-        margin: 3rem 0 4rem;
-        overflow: hidden;
-        h1{
-          font-family: 'NeuePlak', sans-serif;
-          font-size: 9rem;
-          line-height: 0.9;
-          opacity: 1;
-          margin: 0;
-  
-          span{
-            color: #FFDBCD;
+      .hero-logo{
+        padding-top: 2rem
+      }
+
+      .hero-content{
+
+        .hero-heading{
+          margin: 3rem 0 2rem;
+          h1{
+            font-family: 'NeuePlak', sans-serif;
+            font-size: 9rem;
+            line-height: 0.9;
+            opacity: 1;
+            margin: 0;
+    
+            span{
+              color: #FFDBCD;
+            }
           }
+        }
+
+        button{
+          font-family: 'NeuePlak', sans-serif;
+          border-radius: 5rem;
+          border: none;
+          outline: none;
+          background-color: #FF6326;
+          color: #000;
+          padding: 0.75rem 1.25rem;
+          font-size: 1rem;
+          font-weight: 800;
         }
       }
 
-      button{
-        font-family: 'NeuePlak', sans-serif;
-        border-radius: 5rem;
-        border: none;
-        outline: none;
-        background-color: #FF6326;
-        color: #000;
-        padding: 0.75rem 1.25rem;
-        font-size: 1rem;
-        font-weight: 800;
+      .hero-park{
+        position: relative;
+        img{
+        height: 500px;
+
+        }
       }
     }
 
-    .hero-park{
-      position: relative;
-      img{
-      height: 500px;
+    .about-us{
+      background: #000;
+      height: 95vh;
 
+      .about-us-content{
+        padding: 4rem 0;
+
+        .about-us-heading{
+          
+          h1{
+            font-family: 'NeuePlak', sans-serif;
+            font-size: 5rem;
+            line-height: 0.9;
+            opacity: 1;
+            margin: 0;
+            color: #FFDBCD;
+    
+            span{
+              color: #FF6326;
+            }
+          }
+        }
       }
     }
   }
