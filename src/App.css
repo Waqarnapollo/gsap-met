@@ -1,0 +1,13 @@
+  
+  .first{
+    width: 100vw;
+    height: 100vh !important;
+    z-index: 1;
+  }
+  .second{
+    width: 100vw;
+    height: 100vh !important;
+  }
+  
+  
+  
