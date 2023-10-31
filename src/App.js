@@ -23,6 +23,7 @@ const App = () => {
 
     // handle the panel swipe animations
     const gotoPanel = (index, isScrollingDown) => {
+        console.log(index,"index")
         animating = true;
         let target = isScrollingDown ? main.children[index] : main.children[currentIndex];
         console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
@@ -34,7 +35,15 @@ const App = () => {
             onComplete: () => {
                 animating = false;
             }
+            
           });
+          gsap.to(park, {
+            yPercent: isScrollingDown ? 90 : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+           
+            
+          })
         }else{
           tl.to(main.children[currentIndex], {
             yPercent: isScrollingDown ? -100 : 0,
@@ -44,6 +53,7 @@ const App = () => {
                 animating = false;
             }
           });
+          
         }
         currentIndex = index;
     }
@@ -84,6 +94,7 @@ const App = () => {
             self.scroll(self.start);
             preventScroll.enable();
             intentObserver.enable();
+            
             gotoPanel(currentIndex + 1, true);
           }
       },
@@ -144,7 +155,7 @@ const App = () => {
                     <button>Book Your Space</button>
                 </div>
                 <div className="hero-park" ref={(e)=> {park = e}}>
-                   {/* <img src={HeroPark} width="1390" height={200} alt="" /> */}
+                   <img src={HeroPark} width="1390" height={200} alt="" />
                 </div>
             </div>
         </section>
