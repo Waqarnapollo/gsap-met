@@ -10,43 +10,42 @@ import "./App.css"
 
 
 const App = () => {
-    gsap.registerPlugin(Observer, ScrollTrigger);
-    let heading = useRef(null)
-    let main = useRef(null)
-    let park = useRef(null)
-    let tl = gsap.timeline();
+  gsap.registerPlugin(Observer, ScrollTrigger);
+  let heading = useRef(null)
+  let main = useRef(null)
+  let park = useRef(null)
+  let tl = gsap.timeline();
 
-    // Gsap Code
-    let currentIndex = -1;
-    let animating;
-    ScrollTrigger.normalizeScroll(true)
+  // Gsap Code
+  let currentIndex = -1;
+  let animating;
 
-    // handle the panel swipe animations
-    const gotoPanel = (index, isScrollingDown) => {
-        animating = true;
-        let target = isScrollingDown ? main.children[index] : main.children[currentIndex];
-        console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
-        if(currentIndex === 0){
-          tl.to(main.children[currentIndex], {
-            yPercent: isScrollingDown ? -90 : 0,
-            duration: 1.5,
-            ease: Power3.easeOut,
-            onComplete: () => {
-                animating = false;
-            }
-          });
-        }else{
-          tl.to(main.children[currentIndex], {
-            yPercent: isScrollingDown ? -100 : 0,
-            duration: 1.5,
-            ease: Power3.easeOut,
-            onComplete: () => {
-                animating = false;
-            }
-          });
+  // handle the panel swipe animations
+  const gotoPanel = (index, isScrollingDown) => {
+    animating = true;
+    let target = isScrollingDown ? main.children[index] : main.children[currentIndex];
+    console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
+    if(currentIndex === 0){
+      tl.to(main.children[currentIndex], {
+        yPercent: isScrollingDown ? -90 : 0,
+        duration: 1.5,
+        ease: Power3.easeOut,
+        onComplete: () => {
+            animating = false;
         }
-        currentIndex = index;
+      });
+    }else{
+      tl.to(main.children[currentIndex], {
+        yPercent: isScrollingDown ? -100 : 0,
+        duration: 1.5,
+        ease: Power3.easeOut,
+        onComplete: () => {
+          animating = false;
+        }
+      });
     }
+    currentIndex = index;
+  }
 
   useEffect(() => {
     let intentObserver = ScrollTrigger.observe({
@@ -144,7 +143,7 @@ const App = () => {
                     <button>Book Your Space</button>
                 </div>
                 <div className="hero-park" ref={(e)=> {park = e}}>
-                   {/* <img src={HeroPark} width="1390" height={200} alt="" /> */}
+                   {/* <img src={HeroPark} alt="" /> */}
                 </div>
             </div>
         </section>
