@@ -52,11 +52,11 @@ const App = () => {
             }
           });
           gsap.to(park, {
-            y: isScrollingDown ? -100 : 0,
-            opacity: 0.4,
+            y: isScrollingDown ? -200 : 0,
+            opacity: isScrollingDown ? 0.4 : 1,
             duration: 1.5,
             ease: Power3.easeOut,
-          })
+          })  
         }else{
           tl.to(main.children[currentIndex], {
             yPercent: isScrollingDown ? -100 : 0,
