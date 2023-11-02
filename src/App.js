@@ -35,6 +35,7 @@ const App = () => {
             onComplete: () => {
                 animating = false;
             }
+            
           });
           gsap.to(park, {
             yPercent: isScrollingDown ? 90 : 0,
