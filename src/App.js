@@ -14,6 +14,7 @@ const App = () => {
     let heading = useRef(null)
     let main = useRef(null)
     let park = useRef(null)
+    let parkPoints=useRef(null)
     let tl = gsap.timeline();
 
     // Gsap Code
@@ -29,8 +30,8 @@ const App = () => {
         console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
         if(currentIndex === 0){
           tl.to(main.children[currentIndex], {
-            yPercent: isScrollingDown ? -90 : 0,
-            duration: 1.5,
+            yPercent: isScrollingDown ? -100 : 0,
+            duration: 2,
             ease: Power3.easeOut,
             onComplete: () => {
                 animating = false;
@@ -38,30 +39,55 @@ const App = () => {
             
           });
           gsap.to(park, {
-            yPercent: isScrollingDown ? 90 : 0,
-            duration: 1.5,
+            yPercent: isScrollingDown ? 105 : 0,
+            duration: 2,
             ease: Power3.easeOut,
           })
-        }else if(currentIndex === 1){
+        }
+        else if(currentIndex === 1){
           tl.to(main.children[currentIndex], {
             yPercent: isScrollingDown ? -100 : 0,
-            duration: 1.5,
+            duration: 2,
             ease: Power3.easeOut,
             onComplete: () => {
                 animating = false;
             }
           });
           gsap.to(park, {
-            y: isScrollingDown ? -200 : 0,
-            opacity: isScrollingDown ? 0.4 : 1,
-            duration: 1.5,
+            y: isScrollingDown ? -100 : 0,
+            opacity: isScrollingDown  ?  0.4 : 1,
+            duration: 2,
             ease: Power3.easeOut,
-          })  
-        }else{
+          })
+          gsap.from(parkPoints.current, {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.5, // Adjust the stagger value as needed
+          });
+        }
+        else if(currentIndex == 2){
           tl.to(main.children[currentIndex], {
             yPercent: isScrollingDown ? -100 : 0,
-            duration: 1.5,
+            duration: 2,
             ease: Power3.easeOut,
+            onComplete: () => {
+                animating = false;
+            }
+          });
+          gsap.to(park, {
+            y: isScrollingDown ? -100 : 0,
+            opacity: isScrollingDown  ?  0 : 0.4,
+            duration: 0.2,
+            ease: Power3.easeOut,
+          })
+   
+        }
+        else{
+          tl.to(main.children[currentIndex], {
+            yPercent: isScrollingDown ? -15 : 0,
+            duration: 2,
+            ease: Power3.easeOut,     
             onComplete: () => {
                 animating = false;
             }
@@ -120,6 +146,7 @@ const App = () => {
       }
     });
 
+   
   }, [animating, currentIndex]);
 
   useLayoutEffect(()=>{
@@ -151,6 +178,54 @@ const App = () => {
       .staggerTo(heading.children, 1, {y:-40, opacity:1, ease:Power3.easeInOut}, 0.5)
   }, [tl])
 
+  const pointsMarkData=[
+    {
+      id:1,
+      name: "bullPenPlaza",
+      height: 2, //multiple the normal height with 2
+      cordinates: [35,35]
+    },
+    {
+      id:2,
+      name: "DeltaSky360Club",
+      height: 1, 
+      cordinates: [60,50]
+    },
+    {
+      id:3,
+      name: "Pizza31 Club",
+      height: 1, 
+      cordinates: [30,30]
+    }
+    ,
+    {
+      id:4,
+      name: "FanFast",
+      height: 1, 
+      cordinates: [70,40]
+    },
+    {
+      id:5,
+      name: "Field",
+      height: 1, 
+      cordinates: [50,45]
+    },
+    {
+      id:6,
+      name: "EmpireSuites",
+      height: 1, 
+      cordinates: [40,20]
+    },
+    {
+      id:7,
+      name: "CloverHomePlateClub",
+      height: 2, 
+      cordinates: [60,15]
+    },
+
+
+  ]
+
   return (
     <div className="App">
       <div className="main swipe-section"  ref={el=>{main = el}}>
@@ -173,6 +248,9 @@ const App = () => {
         </section>
 
         <section className="panel second">
+             <div className='second-top'>
+
+             </div>
             <div className="about-us">
                 <div className="about-us-content">
                   <div className="about-us-heading">
@@ -186,9 +264,63 @@ const App = () => {
         <section className="panel third">
             <div className="park">
                 <div className="park-content">
-                  
+                {
+                pointsMarkData.map((point,index)=>{
+                  return(
+                      <div key={index} ref={el=>{parkPoints = el}} className="point" style={{
+                        position:"absolute",
+                        left: `${point.cordinates[0]}%`,
+                        top:  `${point.cordinates[1]}%`,
+                      }}>
+                       <span className="point-heading">
+                          {point.name}
+                       </span>
+                       <div className="point-verticalLne" style={{
+                         height: `${point.height*80}px`
+                       }}></div>
+                       <div className='point-circle'></div>
+                   </div>
+                  )
+                })    
+                } 
                 </div> 
             </div>
+        </section>
+
+        {/* Section 4 */}
+        <section className="panel fourth">
+           <div>
+               <div className="fourth-container">
+                <div className="container-left">
+                    <div className="left-first">
+                        <h1>Find <br/>your <br/>Place</h1>
+                    </div>
+                    <div className="left-second">
+                      
+                    </div>
+                    <div className="left-third">
+                      
+                    </div>
+                    <div className='right-spacer'>
+
+                    </div>
+                </div>
+               <div className="container-right">
+                  <div className='right-spacer'>
+
+                  </div>
+                 <div className="right-first">
+
+                  </div>
+                  <div className="right-second">
+                    
+                  </div>
+                  <div className="right-third">
+                    
+                  </div>
+              </div> 
+              </div>          
+           </div>
         </section>
       </div>
     </div>
