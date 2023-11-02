@@ -42,6 +42,21 @@ const App = () => {
             duration: 1.5,
             ease: Power3.easeOut,
           })
+        }else if(currentIndex === 1){
+          tl.to(main.children[currentIndex], {
+            yPercent: isScrollingDown ? -100 : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+            onComplete: () => {
+                animating = false;
+            }
+          });
+          gsap.to(park, {
+            y: isScrollingDown ? -100
+             : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+          })
         }else{
           tl.to(main.children[currentIndex], {
             yPercent: isScrollingDown ? -100 : 0,
@@ -51,11 +66,6 @@ const App = () => {
                 animating = false;
             }
           });
-          // gsap.to(park, {
-          //   yPercent: isScrollingDown ? 20 : 0,
-          //   duration: 1.5,
-          //   ease: Power3.easeOut,
-          // })
         }
         currentIndex = index;
     }
