@@ -51,8 +51,8 @@ const App = () => {
             }
           });
           gsap.to(park, {
-            y: isScrollingDown ? -100
-             : 0,
+            y: isScrollingDown ? -100 : 0,
+            opacity: 0.4,
             duration: 1.5,
             ease: Power3.easeOut,
           })
