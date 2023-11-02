@@ -10,42 +10,54 @@ import "./App.css"
 
 
 const App = () => {
-  gsap.registerPlugin(Observer, ScrollTrigger);
-  let heading = useRef(null)
-  let main = useRef(null)
-  let park = useRef(null)
-  let tl = gsap.timeline();
+    gsap.registerPlugin(Observer, ScrollTrigger);
+    let heading = useRef(null)
+    let main = useRef(null)
+    let park = useRef(null)
+    let tl = gsap.timeline();
 
-  // Gsap Code
-  let currentIndex = -1;
-  let animating;
+    // Gsap Code
+    let currentIndex = -1;
+    let animating;
+    ScrollTrigger.normalizeScroll(true)
 
-  // handle the panel swipe animations
-  const gotoPanel = (index, isScrollingDown) => {
-    animating = true;
-    let target = isScrollingDown ? main.children[index] : main.children[currentIndex];
-    console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
-    if(currentIndex === 0){
-      tl.to(main.children[currentIndex], {
-        yPercent: isScrollingDown ? -90 : 0,
-        duration: 1.5,
-        ease: Power3.easeOut,
-        onComplete: () => {
-            animating = false;
+    // handle the panel swipe animations
+    const gotoPanel = (index, isScrollingDown) => {
+        console.log(index,"index")
+        animating = true;
+        let target = isScrollingDown ? main.children[index] : main.children[currentIndex];
+        console.log(target, isScrollingDown, animating, index,main.children[index],main.children[currentIndex])
+        if(currentIndex === 0){
+          tl.to(main.children[currentIndex], {
+            yPercent: isScrollingDown ? -90 : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+            onComplete: () => {
+                animating = false;
+            }
+          });
+          gsap.to(park, {
+            yPercent: isScrollingDown ? 90 : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+          })
+        }else{
+          tl.to(main.children[currentIndex], {
+            yPercent: isScrollingDown ? -100 : 0,
+            duration: 1.5,
+            ease: Power3.easeOut,
+            onComplete: () => {
+                animating = false;
+            }
+          });
+          // gsap.to(park, {
+          //   yPercent: isScrollingDown ? 20 : 0,
+          //   duration: 1.5,
+          //   ease: Power3.easeOut,
+          // })
         }
-      });
-    }else{
-      tl.to(main.children[currentIndex], {
-        yPercent: isScrollingDown ? -100 : 0,
-        duration: 1.5,
-        ease: Power3.easeOut,
-        onComplete: () => {
-          animating = false;
-        }
-      });
+        currentIndex = index;
     }
-    currentIndex = index;
-  }
 
   useEffect(() => {
     let intentObserver = ScrollTrigger.observe({
@@ -75,7 +87,7 @@ const App = () => {
       trigger: main,
       pin: true,
       anticipatePin: true,
-      markers:true,
+      // markers:true,
       start: "0% 0%",
       end: "+=0%",
       onEnter: (self) => {
@@ -83,6 +95,7 @@ const App = () => {
             self.scroll(self.start);
             preventScroll.enable();
             intentObserver.enable();
+            
             gotoPanel(currentIndex + 1, true);
           }
       },
@@ -96,7 +109,7 @@ const App = () => {
       }
     });
 
-  }, []);
+  }, [animating, currentIndex]);
 
   useLayoutEffect(()=>{
     ScrollTrigger.create({
@@ -143,18 +156,26 @@ const App = () => {
                     <button>Book Your Space</button>
                 </div>
                 <div className="hero-park" ref={(e)=> {park = e}}>
-                   {/* <img src={HeroPark} alt="" /> */}
+                   <img src={HeroPark} height={500} alt="" />
                 </div>
             </div>
         </section>
 
-        <section className="panel">
+        <section className="panel second">
             <div className="about-us">
                 <div className="about-us-content">
                   <div className="about-us-heading">
                       <h1>A one-of-a-kind</h1>
                       <h1>event <span>experience</span></h1>
                   </div>
+                </div> 
+            </div>
+        </section>
+
+        <section className="panel third">
+            <div className="park">
+                <div className="park-content">
+                  
                 </div> 
             </div>
         </section>
