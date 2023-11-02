@@ -41,8 +41,6 @@ const App = () => {
             yPercent: isScrollingDown ? 90 : 0,
             duration: 1.5,
             ease: Power3.easeOut,
-           
-            
           })
         }else{
           tl.to(main.children[currentIndex], {
@@ -53,7 +51,11 @@ const App = () => {
                 animating = false;
             }
           });
-          
+          // gsap.to(park, {
+          //   yPercent: isScrollingDown ? 20 : 0,
+          //   duration: 1.5,
+          //   ease: Power3.easeOut,
+          // })
         }
         currentIndex = index;
     }
@@ -86,7 +88,7 @@ const App = () => {
       trigger: main,
       pin: true,
       anticipatePin: true,
-      markers:true,
+      // markers:true,
       start: "0% 0%",
       end: "+=0%",
       onEnter: (self) => {
@@ -108,7 +110,7 @@ const App = () => {
       }
     });
 
-  }, []);
+  }, [animating, currentIndex]);
 
   useLayoutEffect(()=>{
     ScrollTrigger.create({
@@ -155,18 +157,26 @@ const App = () => {
                     <button>Book Your Space</button>
                 </div>
                 <div className="hero-park" ref={(e)=> {park = e}}>
-                   <img src={HeroPark} width="1390" height={200} alt="" />
+                   <img src={HeroPark} height={500} alt="" />
                 </div>
             </div>
         </section>
 
-        <section className="panel">
+        <section className="panel second">
             <div className="about-us">
                 <div className="about-us-content">
                   <div className="about-us-heading">
                       <h1>A one-of-a-kind</h1>
                       <h1>event <span>experience</span></h1>
                   </div>
+                </div> 
+            </div>
+        </section>
+
+        <section className="panel third">
+            <div className="park">
+                <div className="park-content">
+                  
                 </div> 
             </div>
         </section>
