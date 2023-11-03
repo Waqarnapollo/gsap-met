@@ -1,3 +1,15 @@
+
+@font-face {
+  font-family: "NeuePlak-bold";
+  src: url("./fonts/neue-plak-cufonfonts/Neue\ Plak\ Extended\ Bold.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "NeuePlak";
+  src: url("./fonts/neue-plak-cufonfonts/Neue\ Plak\ Extended\ Regular.ttf")
+    format("truetype");
+}
+
 body { 
   overflow: hidden; 
 }
@@ -69,6 +81,11 @@ body {
 
   .left-first{
     height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10%;
   }
 
   .left-second{
@@ -81,11 +98,12 @@ body {
   }
 
   .left-first>h1{
-    font-size: 120px;
+    font-size: 10rem;
     width: 80%;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    text-align: left;
+    margin: 5px 0px;
+    font-family: NeuePlak-bold;
+    
   }
 
   .right-spacer{

@@ -15,7 +15,10 @@ const App = () => {
     let main = useRef(null)
     let park = useRef(null)
     let parkPoints=useRef(null)
+    let fourthContainer = useRef(null)
+    let fourthHeading= useRef(null)
     let tl = gsap.timeline();
+
 
     // Gsap Code
     let currentIndex = -1;
@@ -81,17 +84,54 @@ const App = () => {
             duration: 0.2,
             ease: Power3.easeOut,
           })
-   
         }
         else{
-          tl.to(main.children[currentIndex], {
-            yPercent: isScrollingDown ? -15 : 0,
-            duration: 2,
-            ease: Power3.easeOut,     
-            onComplete: () => {
-                animating = false;
-            }
-          });
+          if(main.children[currentIndex] || main.children[index] )
+          {
+            console.log(index,"index")
+            console.log(currentIndex,"currentIndex")
+            tl.to(main.children[currentIndex], {
+              yPercent: isScrollingDown ? -15 : 0,
+              duration: 2,
+              ease: Power3.easeOut,     
+              onComplete: () => {
+                  animating = false;
+              }
+            });
+           
+             /* Zoom out the fourth container heading */
+              (isScrollingDown  && index== 4 ) &&
+                gsap.to(fourthHeading, {
+                yPercent:20,
+                xPercent:-30,
+                scale: 0.4, 
+                duration: 1.5, 
+                ease: Power3.easeOut,
+              }) 
+
+             index== 2 &&
+              gsap.to(fourthHeading, {
+              yPercent: 0,
+              xPercent: 0,
+              scale: 1, 
+              duration: 1.5, 
+              ease: Power3.easeOut,
+            }) 
+          
+          }
+          else{
+           
+           
+            tl.to(fourthContainer, {
+              yPercent: isScrollingDown ? -15 : 0,
+              duration: 2,
+              ease: Power3.easeOut,     
+              onComplete: () => {
+                  animating = false;
+              }
+            });    
+          }
+         
         }
         currentIndex = index;
     }
@@ -131,8 +171,7 @@ const App = () => {
           if (preventScroll.isEnabled === false) {
             self.scroll(self.start);
             preventScroll.enable();
-            intentObserver.enable();
-            
+            intentObserver.enable();  
             gotoPanel(currentIndex + 1, true);
           }
       },
@@ -289,11 +328,10 @@ const App = () => {
 
         {/* Section 4 */}
         <section className="panel fourth">
-           <div>
-               <div className="fourth-container">
+               <div className="fourth-container" ref={e=>fourthContainer=e}>
                 <div className="container-left">
                     <div className="left-first">
-                        <h1>Find <br/>your <br/>Place</h1>
+                        <h1 ref={e=>fourthHeading=e}>Find <br/>your <br/>Place</h1>
                     </div>
                     <div className="left-second">
                       
@@ -320,7 +358,6 @@ const App = () => {
                   </div>
               </div> 
               </div>          
-           </div>
         </section>
       </div>
     </div>
